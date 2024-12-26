@@ -1,27 +1,46 @@
-#include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
-
+char wrap(char c, int key)
+{
+    if (isalpha(c))
+    {
+        c += key;
+        if (islower(c))
+        {
+            if (c > 'z')
+                c = 'a' + (c - 'z' - 1);
+            else if (c < 'a')
+                c = 'z' - (c - 'a' - 1);
+        }
+        else if (isupper(c))
+        {
+            if (c > 'Z')
+                c = 'A' + (c - 'Z' - 1);
+            else if (c < 'A')
+                c = 'Z' - (c - 'A' - 1);
+        }
+    }
+    return c;
+}
 
 int main()
 {
-    int n;  
-    cin >> n;
+    int n;
     string str;
-    cin>>str;
     int key;
+    cout << "number of chars: ";
+    cin >> n;
+    cout << "chars: ";
+    cin >> str;
+    cout << "key: ";
     cin >> key;
-    
-for (char &c : str) {
-        if (isalpha(c)) { 
-            c+=key;
-            if (islower(c) && c>'z') 
-                c=(c-'z')+('a'-1); 
-            else if(isupper(c) && c>'Z')
-                c=(c-'Z')+('A'-1);
+
+    for (char &c : str)
+    {
+        c = wrap(c, key);
     }
-}
-    cout<<str;
+    cout << "encrypted into: " << str;
     return 0;
 }
